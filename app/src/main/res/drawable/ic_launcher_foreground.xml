@@ -1,0 +1,18 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Shorts "lightning bolt" symbol, in white -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M59,30 L41,58 L53,58 L47,80 L69,50 L57,50 Z" />
+
+    <!-- Prohibition slash crossing the bolt -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="7"
+        android:strokeLineCap="round"
+        android:pathData="M34,78 L76,32" />
+</vector>

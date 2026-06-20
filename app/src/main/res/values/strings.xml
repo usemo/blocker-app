@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Shorts Blocker</string>
+    <string name="subtitle">Blokuje YouTube Shorts na tym telefonie</string>
+
+    <string name="accessibility_description">Wykrywa odtwarzacz YouTube Shorts i automatycznie z niego wychodzi, dzięki czemu Shorts się nie odtwarzają. Wszystko działa lokalnie na urządzeniu — aplikacja nie ma dostępu do internetu.</string>
+
+    <string name="status_active">✅ Usługa jest WŁĄCZONA — Shorts będą blokowane</string>
+    <string name="status_inactive">⚠️ Usługa jest WYŁĄCZONA\nKliknij poniżej i włącz „Shorts Blocker” w ułatwieniach dostępu</string>
+
+    <string name="open_accessibility_settings">Otwórz ustawienia ułatwień dostępu</string>
+
+    <string name="switch_enabled">Blokowanie aktywne</string>
+    <string name="switch_toast">Pokazuj powiadomienie po zablokowaniu</string>
+
+    <string name="blocked_count">Zablokowanych Shorts: %1$d</string>
+    <string name="toast_blocked">Shorts zablokowane (%1$d)</string>
+
+    <string name="how_it_works_title">Jak to działa?</string>
+    <string name="how_it_works_body">Gdy w aplikacji YouTube otworzy się Short, ta aplikacja natychmiast cofa Cię z niego. W praktyce Shorts nie zdążą się odtworzyć.\n\nAby działało, musisz raz włączyć usługę w ustawieniach ułatwień dostępu Androida (przycisk powyżej). System ostrzeże, że usługa może „odczytywać ekran” — to konieczne, by wykryć moment pojawienia się Shorts.</string>
+
+    <string name="privacy_note">Prywatność: aplikacja nie wysyła żadnych danych. Nie ma uprawnienia do internetu — wszystko zostaje na Twoim telefonie.</string>
+</resources>
