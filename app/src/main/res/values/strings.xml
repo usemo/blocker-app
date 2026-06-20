@@ -1,23 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Shorts Blocker</string>
-    <string name="subtitle">Blokuje YouTube Shorts na tym telefonie</string>
+    <string name="subtitle">Blokuje Shorts, wybrane aplikacje i strony — lokalnie, bez internetu</string>
 
-    <string name="accessibility_description">Wykrywa odtwarzacz YouTube Shorts i automatycznie z niego wychodzi, dzięki czemu Shorts się nie odtwarzają. Wszystko działa lokalnie na urządzeniu — aplikacja nie ma dostępu do internetu.</string>
+    <string name="accessibility_description">Wykrywa YouTube Shorts, zablokowane aplikacje oraz zablokowane strony w przeglądarce i automatycznie je zamyka. Wszystko działa lokalnie na urządzeniu — aplikacja nie ma dostępu do internetu.</string>
 
-    <string name="status_active">✅ Usługa jest WŁĄCZONA — Shorts będą blokowane</string>
+    <string name="status_active">✅ Usługa jest WŁĄCZONA — blokowanie działa</string>
     <string name="status_inactive">⚠️ Usługa jest WYŁĄCZONA\nKliknij poniżej i włącz „Shorts Blocker” w ułatwieniach dostępu</string>
 
     <string name="open_accessibility_settings">Otwórz ustawienia ułatwień dostępu</string>
 
-    <string name="switch_enabled">Blokowanie aktywne</string>
+    <!-- Sections -->
+    <string name="shorts_title">YouTube Shorts</string>
+    <string name="shorts_switch">Blokuj Shorts</string>
+
+    <string name="apps_title">Aplikacje</string>
+    <string name="apps_switch">Blokuj wybrane aplikacje</string>
+    <string name="apps_pick">Wybierz aplikacje do blokowania</string>
+    <string name="apps_count">Zablokowane aplikacje: %1$d</string>
+
+    <string name="sites_title">Strony WWW</string>
+    <string name="sites_switch">Blokuj wybrane strony</string>
+    <string name="sites_manage">Zarządzaj listą stron</string>
+    <string name="sites_count">Zablokowane strony: %1$d</string>
+
     <string name="switch_toast">Pokazuj powiadomienie po zablokowaniu</string>
+    <string name="blocked_count">Łącznie zablokowań: %1$d</string>
 
-    <string name="blocked_count">Zablokowanych Shorts: %1$d</string>
-    <string name="toast_blocked">Shorts zablokowane (%1$d)</string>
+    <!-- App picker -->
+    <string name="apps_picker_hint">Zaznacz aplikacje, które mają być blokowane. Po wejściu w taką aplikację zostaniesz przeniesiony na ekran główny.</string>
+    <string name="search_apps">Szukaj aplikacji…</string>
 
+    <!-- Site list -->
+    <string name="sites_hint">Dodaj domeny do zablokowania (np. facebook.com). Działa w obsługiwanych przeglądarkach (Chrome i podobne). Wpisz samą domenę — bez https:// i www.</string>
+    <string name="site_input_hint">np. facebook.com</string>
+    <string name="add">Dodaj</string>
+    <string name="remove">Usuń</string>
+    <string name="sites_empty">Brak zablokowanych stron.</string>
+
+    <!-- Toasts -->
+    <string name="toast_blocked_shorts">Shorts zablokowane</string>
+    <string name="toast_blocked_app">Aplikacja zablokowana</string>
+    <string name="toast_blocked_site">Strona zablokowana: %1$s</string>
+
+    <!-- How it works -->
     <string name="how_it_works_title">Jak to działa?</string>
-    <string name="how_it_works_body">Gdy w aplikacji YouTube otworzy się Short, ta aplikacja natychmiast cofa Cię z niego. W praktyce Shorts nie zdążą się odtworzyć.\n\nAby działało, musisz raz włączyć usługę w ustawieniach ułatwień dostępu Androida (przycisk powyżej). System ostrzeże, że usługa może „odczytywać ekran” — to konieczne, by wykryć moment pojawienia się Shorts.</string>
+    <string name="how_it_works_body">Aplikacja używa usługi ułatwień dostępu Androida. Gdy pojawi się Short, zablokowana aplikacja lub zablokowana strona — natychmiast je zamyka (cofa lub wraca na ekran główny).\n\nMusisz raz włączyć usługę w ustawieniach ułatwień dostępu (przycisk powyżej).</string>
 
-    <string name="privacy_note">Prywatność: aplikacja nie wysyła żadnych danych. Nie ma uprawnienia do internetu — wszystko zostaje na Twoim telefonie.</string>
+    <string name="privacy_note">Prywatność: aplikacja nie ma uprawnienia do internetu — żadne dane nie opuszczają telefonu. Z aplikacji innych niż YouTube usługa odczytuje tylko nazwę aplikacji, a w przeglądarce adres strony, wyłącznie po to, by je zablokować.</string>
 </resources>

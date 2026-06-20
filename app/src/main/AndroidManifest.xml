@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <!--
+        Lets us list launchable apps for the app picker. This does NOT grant
+        internet access; it only allows enumerating installed apps that have a
+        launcher icon. No INTERNET permission is declared anywhere in this app.
+    -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent>
+    </queries>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -17,6 +29,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".AppPickerActivity"
+            android:exported="false"
+            android:label="@string/apps_title"
+            android:parentActivityName=".MainActivity" />
+
+        <activity
+            android:name=".SiteListActivity"
+            android:exported="false"
+            android:label="@string/sites_title"
+            android:parentActivityName=".MainActivity" />
 
         <service
             android:name=".ShortsBlockerService"

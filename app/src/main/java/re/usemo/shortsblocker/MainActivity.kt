@@ -18,33 +18,43 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.switchEnabled.setOnCheckedChangeListener { _, isChecked ->
-            Prefs.setEnabled(this, isChecked)
-        }
-        binding.switchToast.setOnCheckedChangeListener { _, isChecked ->
-            Prefs.setShowToast(this, isChecked)
-        }
+        binding.switchShorts.setOnCheckedChangeListener { _, v -> Prefs.setShortsEnabled(this, v) }
+        binding.switchApps.setOnCheckedChangeListener { _, v -> Prefs.setAppsEnabled(this, v) }
+        binding.switchSites.setOnCheckedChangeListener { _, v -> Prefs.setSitesEnabled(this, v) }
+        binding.switchToast.setOnCheckedChangeListener { _, v -> Prefs.setShowToast(this, v) }
+
         binding.btnAccessibility.setOnClickListener {
             startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
+        }
+        binding.btnPickApps.setOnClickListener {
+            startActivity(Intent(this, AppPickerActivity::class.java))
+        }
+        binding.btnManageSites.setOnClickListener {
+            startActivity(Intent(this, SiteListActivity::class.java))
         }
     }
 
     override fun onResume() {
         super.onResume()
-        binding.switchEnabled.isChecked = Prefs.isEnabled(this)
+        binding.switchShorts.isChecked = Prefs.isShortsEnabled(this)
+        binding.switchApps.isChecked = Prefs.isAppsEnabled(this)
+        binding.switchSites.isChecked = Prefs.isSitesEnabled(this)
         binding.switchToast.isChecked = Prefs.isShowToast(this)
         updateStatus()
     }
 
     private fun updateStatus() {
-        val serviceOn = isAccessibilityServiceEnabled()
-        if (serviceOn) {
+        if (isAccessibilityServiceEnabled()) {
             binding.textStatus.setText(R.string.status_active)
             binding.textStatus.setTextColor(ContextCompat.getColor(this, R.color.status_ok))
         } else {
             binding.textStatus.setText(R.string.status_inactive)
             binding.textStatus.setTextColor(ContextCompat.getColor(this, R.color.status_warn))
         }
+        binding.textAppsCount.text =
+            getString(R.string.apps_count, Prefs.getBlockedApps(this).size)
+        binding.textSitesCount.text =
+            getString(R.string.sites_count, Prefs.getBlockedSites(this).size)
         binding.textBlocked.text =
             getString(R.string.blocked_count, Prefs.getBlockedCount(this))
     }

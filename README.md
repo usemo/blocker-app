@@ -1,20 +1,39 @@
 # Shorts Blocker
 
-Prosta aplikacja na Androida, która **blokuje YouTube Shorts**. Gdy w aplikacji
-YouTube otworzy się Short, ta aplikacja natychmiast Cię z niego cofa — w praktyce
-Shorts się nie odtwarzają.
+Aplikacja na Androida do osobistego użytku, która blokuje:
 
-Aplikacja jest na prywatny użytek. Działa w pełni lokalnie i **nie ma uprawnienia
-do internetu** — żadne dane o tym, co oglądasz, nie opuszczają telefonu.
+- **YouTube Shorts** — po wejściu w Short natychmiast Cię z niego cofa,
+- **wybrane aplikacje** — po wejściu w zablokowaną apkę wraca na ekran główny,
+- **wybrane strony WWW** — w obsługiwanych przeglądarkach (Chrome i podobne)
+  wykrywa adres i cofa z zablokowanej domeny.
+
+Każdy rodzaj blokowania ma osobny przełącznik (włącz/wyłącz).
+
+Aplikacja działa w pełni lokalnie i **nie ma uprawnienia do internetu** —
+żadne dane nie opuszczają telefonu.
 
 ## Jak to działa
 
 Aplikacja korzysta z **usługi ułatwień dostępu** (Accessibility Service). Usługa
-obserwuje wyłącznie aplikację YouTube i wykrywa moment, w którym na ekranie
-pojawia się odtwarzacz Shorts (wewnętrznie nazywany „reel”). Wtedy wykonuje
-gest „wstecz”, który wyrzuca Cię z Shortsa z powrotem na poprzedni ekran.
+obserwuje aktywne aplikacje i reaguje na trzy sytuacje:
 
-To jedyny sposób, by zablokować Shorts bez modyfikowania samej aplikacji YouTube.
+- w YouTube wykrywa odtwarzacz Shorts (wewnętrznie „reel”) i wykonuje „wstecz”,
+- gdy na pierwszy plan wejdzie zablokowana aplikacja — wykonuje „ekran główny”,
+- w obsługiwanej przeglądarce odczytuje pasek adresu i jeśli pasuje do
+  zablokowanej domeny — wykonuje „wstecz”.
+
+Z aplikacji innych niż YouTube usługa odczytuje wyłącznie nazwę aplikacji
+(a w przeglądarce — adres strony), nigdy ich treści. To jedyny sposób, by
+blokować bez modyfikowania innych aplikacji i bez dostępu do sieci.
+
+### Ograniczenia blokowania stron
+
+Blokowanie WWW działa przez odczyt paska adresu, więc:
+
+- działa w przeglądarkach opartych na Chromium (Chrome, Brave, Edge, Opera) oraz
+  częściowo w Samsung Internet i Firefox — identyfikatory paska adresu są w
+  `BROWSER_URL_BARS` w `ShortsBlockerService.kt`,
+- nie blokuje stron otwieranych wewnątrz innych aplikacji (WebView).
 
 ## Instalacja (gotowy APK)
 

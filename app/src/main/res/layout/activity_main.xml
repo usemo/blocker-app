@@ -21,17 +21,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
+            android:alpha="0.7"
             android:text="@string/subtitle"
-            android:textSize="15sp"
-            android:alpha="0.7" />
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/textStatus"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:padding="16dp"
             android:background="@drawable/status_background"
+            android:padding="16dp"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -42,25 +42,125 @@
             android:layout_marginTop="16dp"
             android:text="@string/open_accessibility_settings" />
 
+        <!-- Shorts -->
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="24dp"
             android:background="?android:attr/listDivider" />
 
-        <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/switchEnabled"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="@string/switch_enabled"
+            android:text="@string/shorts_title"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:textAllCaps="true"
+            android:alpha="0.6" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/switchShorts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/shorts_switch"
             android:textSize="16sp" />
+
+        <!-- Apps -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="20dp"
+            android:background="?android:attr/listDivider" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/apps_title"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:textAllCaps="true"
+            android:alpha="0.6" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/switchApps"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/apps_switch"
+            android:textSize="16sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnPickApps"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/apps_pick" />
+
+        <TextView
+            android:id="@+id/textAppsCount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:alpha="0.7"
+            android:textSize="14sp" />
+
+        <!-- Sites -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="20dp"
+            android:background="?android:attr/listDivider" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/sites_title"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:textAllCaps="true"
+            android:alpha="0.6" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/switchSites"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/sites_switch"
+            android:textSize="16sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnManageSites"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/sites_manage" />
+
+        <TextView
+            android:id="@+id/textSitesCount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:alpha="0.7"
+            android:textSize="14sp" />
+
+        <!-- General -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="20dp"
+            android:background="?android:attr/listDivider" />
 
         <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/switchToast"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:text="@string/switch_toast"
             android:textSize="16sp" />
 
@@ -68,7 +168,7 @@
             android:id="@+id/textBlocked"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -84,18 +184,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="@string/how_it_works_body"
-            android:textSize="14sp"
+            android:alpha="0.85"
             android:lineSpacingMultiplier="1.2"
-            android:alpha="0.85" />
+            android:text="@string/how_it_works_body"
+            android:textSize="14sp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
+            android:alpha="0.6"
+            android:lineSpacingMultiplier="1.2"
             android:text="@string/privacy_note"
-            android:textSize="13sp"
-            android:alpha="0.6" />
+            android:textSize="13sp" />
 
     </LinearLayout>
 
