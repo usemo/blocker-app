@@ -63,8 +63,8 @@ class ShortsBlockerService : AccessibilityService() {
             if (blocked.isEmpty()) return
             val root = rootInActiveWindow ?: return
             try {
-                val url = readUrl(root, urlBarId) ?: return
-                val match = blocked.firstOrNull { url.contains(it) }
+                val host = readHostIfNotEditing(root, urlBarId) ?: return
+                val match = blocked.firstOrNull { host == it || host.endsWith(".$it") }
                 if (match != null) {
                     lastActionTime = now
                     performGlobalAction(GLOBAL_ACTION_BACK)
@@ -98,20 +98,37 @@ class ShortsBlockerService : AccessibilityService() {
         return false
     }
 
-    /** Reads the current address-bar text from a browser, lowercased. */
-    private fun readUrl(root: AccessibilityNodeInfo, urlBarId: String): String? {
+    /**
+     * Returns the host shown in the address bar, but ONLY when the bar is not
+     * being edited. While the user is typing (the field is focused), we return
+     * null so we never act on a half-typed address or Chrome's autocomplete —
+     * that previously closed the keyboard and bounced the user off the page.
+     */
+    private fun readHostIfNotEditing(root: AccessibilityNodeInfo, urlBarId: String): String? {
         val nodes = root.findAccessibilityNodeInfosByViewId(urlBarId) ?: return null
-        var result: String? = null
+        var host: String? = null
         for (node in nodes) {
+            val editing = node.isFocused
             val text = node.text?.toString()
             @Suppress("DEPRECATION")
             node.recycle()
+            if (editing) return null
             if (!text.isNullOrBlank()) {
-                result = text.lowercase()
+                host = extractHost(text)
                 break
             }
         }
-        return result
+        return host
+    }
+
+    /** Strips scheme, "www.", path and any trailing text, leaving a bare host. */
+    private fun extractHost(raw: String): String {
+        var s = raw.trim().lowercase()
+        s = s.removePrefix("https://").removePrefix("http://")
+        s = s.removePrefix("www.")
+        s = s.substringBefore('/')
+        s = s.substringBefore(' ')
+        return s
     }
 
     override fun onInterrupt() {
