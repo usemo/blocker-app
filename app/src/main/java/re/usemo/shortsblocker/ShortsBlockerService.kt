@@ -4,6 +4,7 @@ import android.accessibilityservice.AccessibilityService
 import android.os.SystemClock
 import android.view.accessibility.AccessibilityEvent
 import android.view.accessibility.AccessibilityNodeInfo
+import android.view.accessibility.AccessibilityWindowInfo
 import android.widget.Toast
 
 /**
@@ -61,9 +62,12 @@ class ShortsBlockerService : AccessibilityService() {
         if (urlBarId != null && Prefs.isSitesEnabled(this)) {
             val blocked = Prefs.getBlockedSites(this)
             if (blocked.isEmpty()) return
+            // While the keyboard is up the user is typing an address, so we stay
+            // out of the way. Once the page has loaded the keyboard is gone.
+            if (isKeyboardOpen()) return
             val root = rootInActiveWindow ?: return
             try {
-                val host = readHostIfNotEditing(root, urlBarId) ?: return
+                val host = readHost(root, urlBarId) ?: return
                 val match = blocked.firstOrNull { host == it || host.endsWith(".$it") }
                 if (match != null) {
                     lastActionTime = now
@@ -98,23 +102,23 @@ class ShortsBlockerService : AccessibilityService() {
         return false
     }
 
-    /**
-     * Returns the host shown in the address bar, but ONLY when the bar is not
-     * being edited. While the user is typing (the field is focused), we return
-     * null so we never act on a half-typed address or Chrome's autocomplete —
-     * that previously closed the keyboard and bounced the user off the page.
-     */
-    private fun readHostIfNotEditing(root: AccessibilityNodeInfo, urlBarId: String): String? {
+    /** True if a soft keyboard is currently shown (i.e. the user is typing). */
+    private fun isKeyboardOpen(): Boolean {
+        val ws = windows ?: return false
+        return ws.any { it.type == AccessibilityWindowInfo.TYPE_INPUT_METHOD }
+    }
+
+    /** Reads the host shown in the browser's address bar, or null if unavailable. */
+    private fun readHost(root: AccessibilityNodeInfo, urlBarId: String): String? {
         val nodes = root.findAccessibilityNodeInfosByViewId(urlBarId) ?: return null
         var host: String? = null
         for (node in nodes) {
-            val editing = node.isFocused
             val text = node.text?.toString()
             @Suppress("DEPRECATION")
             node.recycle()
-            if (editing) return null
             if (!text.isNullOrBlank()) {
-                host = extractHost(text)
+                val h = extractHost(text)
+                if (h.contains('.')) host = h
                 break
             }
         }
