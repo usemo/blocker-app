@@ -13,6 +13,7 @@ object Prefs {
     private const val KEY_SITES_ENABLED = "sites_enabled"
     private const val KEY_BLOCKED_SITES = "blocked_sites"
     private const val KEY_TOAST = "show_toast"
+    private const val KEY_DIAGNOSTIC = "diagnostic"
     private const val KEY_BLOCKED_COUNT = "blocked_count"
 
     private fun prefs(context: Context) =
@@ -83,6 +84,12 @@ object Prefs {
 
     fun setShowToast(context: Context, value: Boolean) =
         prefs(context).edit().putBoolean(KEY_TOAST, value).apply()
+
+    fun isDiagnostic(context: Context): Boolean =
+        prefs(context).getBoolean(KEY_DIAGNOSTIC, false)
+
+    fun setDiagnostic(context: Context, value: Boolean) =
+        prefs(context).edit().putBoolean(KEY_DIAGNOSTIC, value).apply()
 
     fun getBlockedCount(context: Context): Int =
         prefs(context).getInt(KEY_BLOCKED_COUNT, 0)

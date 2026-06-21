@@ -23,6 +23,8 @@
     <string name="sites_switch">Blokuj wybrane strony</string>
     <string name="sites_manage">Zarządzaj listą stron</string>
     <string name="sites_count">Zablokowane strony: %1$d</string>
+    <string name="sites_diagnostic">Tryb diagnostyczny</string>
+    <string name="sites_diagnostic_hint">Pokazuje wykryty adres z przeglądarki (do testów). Włącz, otwórz Chrome i powiedz, co się pojawia.</string>
 
     <string name="switch_toast">Pokazuj powiadomienie po zablokowaniu</string>
     <string name="blocked_count">Łącznie zablokowań: %1$d</string>

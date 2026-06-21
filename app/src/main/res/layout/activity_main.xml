@@ -149,6 +149,22 @@
             android:alpha="0.7"
             android:textSize="14sp" />
 
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/switchDiagnostic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/sites_diagnostic"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:alpha="0.55"
+            android:text="@string/sites_diagnostic_hint"
+            android:textSize="12sp" />
+
         <!-- General -->
         <View
             android:layout_width="match_parent"

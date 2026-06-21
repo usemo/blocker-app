@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity() {
         binding.switchShorts.setOnCheckedChangeListener { _, v -> Prefs.setShortsEnabled(this, v) }
         binding.switchApps.setOnCheckedChangeListener { _, v -> Prefs.setAppsEnabled(this, v) }
         binding.switchSites.setOnCheckedChangeListener { _, v -> Prefs.setSitesEnabled(this, v) }
+        binding.switchDiagnostic.setOnCheckedChangeListener { _, v -> Prefs.setDiagnostic(this, v) }
         binding.switchToast.setOnCheckedChangeListener { _, v -> Prefs.setShowToast(this, v) }
 
         binding.btnAccessibility.setOnClickListener {
@@ -39,6 +40,7 @@ class MainActivity : AppCompatActivity() {
         binding.switchShorts.isChecked = Prefs.isShortsEnabled(this)
         binding.switchApps.isChecked = Prefs.isAppsEnabled(this)
         binding.switchSites.isChecked = Prefs.isSitesEnabled(this)
+        binding.switchDiagnostic.isChecked = Prefs.isDiagnostic(this)
         binding.switchToast.isChecked = Prefs.isShowToast(this)
         updateStatus()
     }
