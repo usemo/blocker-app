@@ -1,6 +1,7 @@
 package re.usemo.shortsblocker
 
 import android.accessibilityservice.AccessibilityService
+import android.accessibilityservice.AccessibilityServiceInfo
 import android.content.Intent
 import android.os.Handler
 import android.os.Looper
@@ -31,10 +32,12 @@ class ShortsBlockerService : AccessibilityService() {
     private var lastActionTime = 0L
     private val handler = Handler(Looper.getMainLooper())
     private var lastDiagnosticUrl: String? = null
+    private var appliedScope: Set<String>? = null
 
     private val sitePoll = object : Runnable {
         override fun run() {
             try {
+                applyScopeIfNeeded()
                 checkBrowserSites()
             } finally {
                 handler.postDelayed(this, POLL_INTERVAL_MS)
@@ -44,8 +47,29 @@ class ShortsBlockerService : AccessibilityService() {
 
     override fun onServiceConnected() {
         super.onServiceConnected()
+        applyScopeIfNeeded()
         handler.removeCallbacks(sitePoll)
         handler.postDelayed(sitePoll, POLL_INTERVAL_MS)
+    }
+
+    /**
+     * Restricts the service so it only observes the apps it actually needs:
+     * YouTube, the supported browsers, and the apps the user chose to block.
+     * Everything else (banking apps, etc.) is no longer observed at all. This
+     * is both better for privacy and friendlier to anti-fraud checks that flag
+     * accessibility services which watch every app.
+     */
+    private fun applyScopeIfNeeded() {
+        val blockedApps = Prefs.getBlockedApps(this)
+        if (blockedApps == appliedScope) return
+        val info = serviceInfo ?: return
+        val pkgs = LinkedHashSet<String>()
+        pkgs.add(YT_PACKAGE)
+        pkgs.addAll(BROWSER_URL_BARS.keys)
+        pkgs.addAll(blockedApps)
+        info.packageNames = pkgs.toTypedArray()
+        serviceInfo = info
+        appliedScope = blockedApps
     }
 
     override fun onUnbind(intent: Intent?): Boolean {
